@@ -42,6 +42,7 @@ dist/**/*
 yarn.lock
 
 
+.gitignore 
 
 
 .vscode/
