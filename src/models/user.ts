@@ -8,6 +8,19 @@ interface IUser {
     isVerified: boolean
 }
 
+interface UserDoc extends mongoose.Document {
+    name : string;
+    email : string;
+    PhoneNumber: number;
+    role: string;
+    isVerified: boolean;
+}
+
+interface UserModelInterface extends mongoose.Model<UserDoc> {
+    build (attr: IUser) :UserDoc
+}
+
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -38,3 +51,11 @@ const userSchema = new mongoose.Schema({
         timestamps: true
     }
  );
+
+ userSchema.statics.build = (attr : IUser) => {
+     return new User (attr)
+ }
+
+ const User = mongoose.model<UserDoc, UserModelInterface>('user', userSchema)
+
+ export default User
