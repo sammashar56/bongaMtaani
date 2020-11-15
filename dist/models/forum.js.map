@@ -1,1 +1,1 @@
-{"version":3,"file":"forum.js","sourceRoot":"","sources":["../../src/models/forum.ts"],"names":[],"mappings":""}
+{"version":3,"file":"forum.js","sourceRoot":"","sources":["../../src/models/forum.ts"],"names":[],"mappings":";;;;;AAAA,wDAA0C;AAQ1C,MAAM,WAAW,GAAG,IAAI,kBAAQ,CAAC,MAAM,CAAC;IACpC,KAAK,EAAE;QACH,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;IACD,KAAK,EAAE;QACH,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACjB;CAEJ,EACG;IACI,UAAU,EAAE,IAAI;CACnB,CACH,CAAC"}
