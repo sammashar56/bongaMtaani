@@ -1,11 +1,10 @@
 import mongoose, {Schema} from "mongoose";
-import { Timestamp } from "mongodb";
-
 
 interface Iforum {
     title: string,
     forum: string,
-    category: string
+    category: string,
+    views : number
 } 
 
 const forumSchema = new mongoose.Schema({
@@ -17,5 +16,16 @@ const forumSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Timestamp
-})
+    views :{
+        type: String,
+        required: true
+    },
+    category: {
+        type: [{type: Schema.Types.ObjectId, ref:"category"}]
+    }
+
+}, 
+    {
+        timestamps: true
+    }
+ );

@@ -1,31 +1,26 @@
 import mongoose, {Schema} from "mongoose";
-import { Timestamp } from "mongodb";
+
 
 interface Icategory {
-    name: string,
-    email: string,
+    Categorytitle: string,
+    isApproved: string,
+    isActivated: boolean
 }
 
 const categorySchema = new mongoose.Schema({
-    name: {
+    categorytitle: {
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
+    isActivated:{
+        type: Boolean,
+        default: false
     },
-    PhoneNumber: {
-        type: String,
-        required: true
-    },
-    Role: {
-        type: String,
-        required: true
-    },
-    isVerified: {
+    isApproved: {
         type: Boolean,
         required: true
-    },
-    Timestamp
-})
+    },}, 
+    {
+        timestamps: true
+    }
+ );

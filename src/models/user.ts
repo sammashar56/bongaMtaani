@@ -1,5 +1,4 @@
 import mongoose, {Schema} from "mongoose";
-import { Timestamp } from "mongodb";
 
 interface IUser {
     name: string,
@@ -24,11 +23,18 @@ const userSchema = new mongoose.Schema({
     },
     Role: {
         type: String,
-        required: true
+        required: true,
+        default: "user"
     },
     isVerified: {
         type: Boolean,
         required: true
     },
-    Timestamp
-})
+    Forum: {
+        type:[{type: Schema.Types.ObjectId, ref:""}]
+    },
+}, 
+    {
+        timestamps: true
+    }
+ );
