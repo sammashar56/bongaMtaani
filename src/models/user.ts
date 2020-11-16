@@ -4,7 +4,7 @@ interface IUser {
     name: string,
     email: string,
     PhoneNumber: number,
-    Role: string,
+    role: string,
     isVerified: boolean
 }
 
@@ -34,9 +34,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Role: {
+    role: {
         type: String,
-        required: true,
+        required: false,
         default: "user"
     },
     isVerified: {
