@@ -5,7 +5,7 @@ interface Iforum {
     forum: string,
     category: string,
     views : number,
-    reports : number
+    reports : number,
     isAbusive : false
 } 
 
