@@ -4,7 +4,9 @@ interface Iforum {
     title: string,
     forum: string,
     category: string,
-    views : number
+    views : number,
+    reports : number
+    isAbusive : false
 } 
 
 interface ForumDoc extends mongoose.Document {
@@ -12,6 +14,8 @@ interface ForumDoc extends mongoose.Document {
     forum : string;
     category: string;
     views : number;
+    reports : number;
+    isAbusive : false;
 }
 
 interface forumModelInterface extends mongoose.Model<ForumDoc> {
@@ -30,6 +34,12 @@ const forumSchema = new mongoose.Schema({
     views :{
         type: String,
         required: true
+    },
+    isAbusive : {
+        type: Boolean,
+    },
+    reports : {
+        type: Number
     },
     category: {
         type: [{type: Schema.Types.ObjectId, ref:"category"}]
