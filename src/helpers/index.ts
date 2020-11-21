@@ -14,9 +14,7 @@ export interface Session {
     expires: number;
 }
 
-
-export type PartialSession =Omit<Session, "issued" | "expired">;
-
+export type PartialSession = Omit<Session, "issued" | "expired">;
 
 export interface EncodeResult {
     token: string;
