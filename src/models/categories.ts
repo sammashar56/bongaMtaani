@@ -8,7 +8,6 @@ interface Icategory {
     isActive: boolean
 }
 
-
 interface categoryModelInterface extends mongoose.Model<categoryDoc> {
     build(attr: Icategory): categoryDoc
 }
@@ -19,7 +18,6 @@ interface categoryDoc extends mongoose.Document {
     isActivated: boolean;
     isActive: boolean
 }
-
 
 const categorySchema = new mongoose.Schema({
     categorytitle: {
