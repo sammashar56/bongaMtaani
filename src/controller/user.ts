@@ -14,7 +14,7 @@ export async function fetchProfile(session:Session){
             status:404,
             message: "user not found"
         }
-    }
+    } 
 }
 
 export async function authenticate(payload: {

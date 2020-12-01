@@ -2,7 +2,7 @@ import {encode, TAlgorithm, decode} from "jwt-simple";
 import {EncodeResult, Session, PartialSession, DecodeResult, ExpirationStatus,} from "./index";
 
 export function encodeSession (secretKey: string, partialSession: PartialSession, long: boolean): EncodeResult {
-    const algorithm: TAlgorithm = 'HS256'
+    const algorithm: TAlgorithm = "HS256"
     const issued = Date.now()
     const expires : number = long ? issued + 604800000 : issued + 864000000
 
@@ -11,7 +11,7 @@ export function encodeSession (secretKey: string, partialSession: PartialSession
         issued: issued,
         expires: expires
     }
-
+ 
     return {
         token : encode (session,secretKey,algorithm),
         issued: issued,
@@ -29,6 +29,7 @@ export function decodeSession(secretKey:string, tokenString:string,): DecodeResu
 
     }catch (_e) {
         const e: Error = _e;
+        
         if(e.message === "no token supplied" || e.message === "not enough or too many segments"){
             return {
                 type: "invalid-token"

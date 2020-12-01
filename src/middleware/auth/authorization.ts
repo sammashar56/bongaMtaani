@@ -4,10 +4,10 @@ import {DecodeResult, ExpirationStatus, Session} from "../../helpers/index";
 import config from "../../config/config"
 import { decode } from "jwt-simple";
 
-export fucntion requireJWTMiddleware(req: Request, res: Response, next: NextFunction) {
+export function requireJWTMiddleware(req: Request, res: Response, next: NextFunction) {
     const unathorized = (message: string ) => res.status(401).json({
         ok: false,
-        status: 401,
+        status: 401, 
         message: message
     })
 
@@ -17,17 +17,17 @@ export fucntion requireJWTMiddleware(req: Request, res: Response, next: NextFunc
     const header : any = req.header(requestHeader)
 
     if(!header){
-        unauthorized(`Required ${requestHeader} header not found`)
+        unathorized(`Required ${requestHeader} header not found`)
     }
 
-    const decodeSession : DecodeResult = decodeSession(config.secret_key, header);
+    const decodedSession : DecodeResult = decodeSession(config.secret_key, header);
 
-    if(decodeSession.type === "intergrity-error" || decodeSession.type === "invalid-token") {
-        unauthorized(`failed to decode or validate authorization token. Reason ${decodeSession.type}.`);
+    if(decodedSession.type === "intergrity-error" || decodedSession.type === "invalid-token") {
+        unathorized(`failed to decode or validate authorization token. Reason ${decodedSession.type}.`);
         return;
     }
 
-    const Expiration : ExpirationStatus = checkExpirationStatus(decodeSession.session);
+    const Expiration : ExpirationStatus = checkExpirationStatus(decodedSession.session);
 
     if(Expiration === "expired"){
         unathorized(`Authorization token has expired. Please create a new authorization token`);
@@ -37,9 +37,9 @@ export fucntion requireJWTMiddleware(req: Request, res: Response, next: NextFunc
 
     if(Expiration === "active") {
         //automatically renew session and send it back with a response
-        const {token, expires, issued} = encodeSession(config.secret_key, decodeSession.session, true);
+        const {token, expires, issued} = encodeSession(config.secret_key, decodedSession.session, true);
         Session = {
-            ...decodeSession.session,
+            ...decodedSession.session,
             expires: expires,
             issued: issued
         };
@@ -47,7 +47,7 @@ export fucntion requireJWTMiddleware(req: Request, res: Response, next: NextFunc
         res.setHeader("X-powered-By", "sobibor")
            
     }else {
-        Session = decodeSession.session;
+        Session = decodedSession.session;
     }
     //set the session on response.locals object for routes to access
     res.locals = {

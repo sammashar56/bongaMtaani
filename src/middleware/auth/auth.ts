@@ -1,11 +1,11 @@
 import express, {Response, Request, NextFunction} from 'express'
-import {autheticate, fetchprofile} from "../../controller/user"
+import {authenticate, fetchProfile} from "../../controller/user"
 import {requireJWTMiddleware} from "../auth/authorization"
 
 const api = express.Router()
 
 api.post(`/access`, (req:Request, res: Response, next: NextFunction)=> {
-    autheticate(req.body)
+    authenticate(req.body)
         .then((Res: any)=>{
             res.status(201).json(Res)
         })
@@ -17,7 +17,7 @@ api.post(`/access`, (req:Request, res: Response, next: NextFunction)=> {
 })
 
 api.get("/me", requireJWTMiddleware, (req: Request, res : Response) => {
-    fetchprofile(res.locals.session)
+    fetchProfile(res.locals.session)
         .then(Res => {
             res.status(200).json(Res)
         })
