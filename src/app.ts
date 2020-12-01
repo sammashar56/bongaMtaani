@@ -3,10 +3,8 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
-
 const app = express();
 const port: number = 3000;
-
 
 mongoose.connect('mongodb://localhost:27017/forum_api', {
   useCreateIndex: true,
