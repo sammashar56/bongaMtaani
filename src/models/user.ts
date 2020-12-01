@@ -4,7 +4,7 @@ interface IUser {
     name: string,
     email: string,
     PhoneNumber: number,
-    Role: string,
+    role: string,
     isVerified: boolean
 }
 
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Role: {
+    role: {
         type: String,
         required: true,
         default: "user"
@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     Forum: {
-        type:[{type: Schema.Types.ObjectId, ref:""}]
+        type:[{type: Schema.Types.ObjectId, ref:"Forum"}]
     },
 }, 
     {
@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
  userSchema.statics.build = (attr : IUser) => {
      return new User (attr)
  }
-
- const User = mongoose.model<UserDoc, UserModelInterface>('user', userSchema)
+ 
+ const User = mongoose.model<UserDoc, UserModelInterface>('User', userSchema)
 
  export default User

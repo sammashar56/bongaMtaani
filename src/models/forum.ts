@@ -4,14 +4,18 @@ interface Iforum {
     title: string,
     forum: string,
     category: string,
-    views : number
+    views : number,
+    reports : number,
+    like: number,
+    isAbusive : boolean
 } 
 
 interface ForumDoc extends mongoose.Document {
     title : string;
     forum : string;
-    category: string;
     views : number;
+    reports : number;
+    isAbusive : false;
 }
 
 interface forumModelInterface extends mongoose.Model<ForumDoc> {
@@ -21,18 +25,31 @@ interface forumModelInterface extends mongoose.Model<ForumDoc> {
 const forumSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: false
     },
     forum: {
         type: String,
         required: true
     },
     views :{
-        type: String,
-        required: true
+        type: Number,
+        default: 0
+    },
+    isAbusive : {
+        type: Boolean,
+        default: false
+    },
+    reports : {
+        type: Number,
+        default: 0
     },
     category: {
-        type: [{type: Schema.Types.ObjectId, ref:"category"}]
+        type: Schema.Types.ObjectId, 
+        ref:"category"
+    },
+    user: {
+        type: Schema.Types.ObjectId, 
+        ref: "User"
     }
 
 }, 
@@ -46,6 +63,6 @@ forumSchema.statics.build = (attr: Iforum) => {
     return new Forum(attr)
 }
 
-const Forum = mongoose.model<ForumDoc, forumModelInterface> ('forum', forumSchema)
+const Forum = mongoose.model<ForumDoc, forumModelInterface> ('Forum', forumSchema)
 
 export default Forum
