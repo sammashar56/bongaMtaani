@@ -48,7 +48,8 @@ const forumSchema = new mongoose.Schema({
         ref:"category"
     },
     user: {
-        type: [{type: Schema.Types.ObjectId, ref: "User"}]
+        type: Schema.Types.ObjectId, 
+        ref: "User"
     }
 
 }, 
