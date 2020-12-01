@@ -1,6 +1,5 @@
 import mongoose, {Schema} from "mongoose";
 
-
 interface Icategory {
     Categorytitle: string,
     isApproved: boolean,
@@ -25,7 +24,8 @@ const categorySchema = new mongoose.Schema({
         required: true
     },
     forum: {
-        type: [{type: Schema.Types.ObjectId, ref: "Forum" }]
+        type: Schema.Types.ObjectId, 
+        ref: "Forum" 
     },
     isActivated:{
         type: Boolean,

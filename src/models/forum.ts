@@ -7,7 +7,7 @@ interface Iforum {
     views : number,
     reports : number,
     like: number,
-    isAbusive : false
+    isAbusive : boolean
 } 
 
 interface ForumDoc extends mongoose.Document {
@@ -35,7 +35,6 @@ const forumSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    
     isAbusive : {
         type: Boolean,
         default: false
