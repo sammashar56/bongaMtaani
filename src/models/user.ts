@@ -5,6 +5,7 @@ interface IUser {
     email: string,
     PhoneNumber: number,
     role: string,
+    uid: string,
     isVerified: boolean
 }
 
@@ -13,6 +14,7 @@ interface UserDoc extends mongoose.Document {
     email : string;
     PhoneNumber: number;
     role: string;
+    uid: string,
     isVerified: boolean;
 }
 
@@ -32,7 +34,8 @@ const userSchema = new mongoose.Schema({
     },
     PhoneNumber: {
         type: String,
-        required: true
+        required: true,
+        default: 0
     },
     role: {
         type: String,
@@ -41,10 +44,15 @@ const userSchema = new mongoose.Schema({
     },
     isVerified: {
         type: Boolean,
+        default: false,
+        required: true
+    },
+    uid: {
+        type: String,
         required: true
     },
     Forum: {
-        type:[{type: Schema.Types.ObjectId, ref:""}]
+        type:[{type: Schema.Types.ObjectId, ref: "Forum"}]
     },
 }, 
     {

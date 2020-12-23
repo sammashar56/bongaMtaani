@@ -7,8 +7,7 @@ interface Icategory {
     isActivated: boolean
 }
 
-
-interface categoryModelInterface extends mongoose.Model<CategoryDoc> {
+interface categoryModelInterface extends mongoose.Model<categoryDoc> {
     build(attr: Icategory): categoryDoc
 }
 
@@ -42,6 +41,6 @@ const categorySchema = new mongoose.Schema({
      return new Category(attr)
  }
 
- const Category = mongoose.model<categoryDoc, categoryModelInterface>('category', CategorySchema)
+ const Category = mongoose.model<categoryDoc, categoryModelInterface>('category', categorySchema)
 
  export default Category 

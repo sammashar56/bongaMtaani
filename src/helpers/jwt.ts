@@ -13,7 +13,7 @@ export function encodeSession (secretKey: string, partialSession: PartialSession
     }
  
     return {
-        token : encode (session,secretKey,algorithm),
+        token : encode(session,secretKey,algorithm),
         issued: issued,
         expires: expires
     }

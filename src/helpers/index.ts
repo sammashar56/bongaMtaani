@@ -1,13 +1,17 @@
 export interface User1 {
     _id: string;
     name: string;
-    uid: string;
     email: string;
+    phoneNumber: number;
+    uid: string;
+    isVerified: boolean; 
 }
 
 export interface Session {
     _id: string;
     name: string;
+    phoneNumber: number;
+    role: string;
     uid: string;
     email:string;
     issued: number;

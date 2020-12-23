@@ -21,7 +21,7 @@ interface forumModelInterface extends mongoose.Model<ForumDoc> {
 const forumSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: false
     },
     forum: {
         type: String,
@@ -32,7 +32,8 @@ const forumSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: [{type: Schema.Types.ObjectId, ref:"category"}]
+        type: Schema.Types.ObjectId,
+        ref: "category"
     }
 
 }, 

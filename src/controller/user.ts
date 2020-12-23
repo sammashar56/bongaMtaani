@@ -1,52 +1,58 @@
-
-import {encodeSession} from "../helpers/jwt";
-import config from "../config/config";
-import {User1, Session} from "../helpers/index";
 import User from "../models/user";
+import { encodeSession } from '../helpers/jwt';
+import config from "../config";
+import { User1, Session } from '../helpers/index';
 
-export async function fetchProfile(session:Session){
-    const profile = await User.findById({_id: session._id}).populate("user")
-    if(profile) {
-        return profile
-    }
-    else{
-        throw{
-            status:404,
-            message: "user not found"
+
+export async function fetchProfile(session: Session) {
+    const profile = await User.findById({ _id: session._id }).populate("users")
+    
+    if (profile) {
+        return {
+            profile
         }
-    } 
+
+    } else {
+        throw {
+            status: 404,
+            message: "account not found"
+        }
+    }
 }
 
 export async function authenticate(payload: {
     uid: string,
     email:string,
     name: string,
-})
-{
-    const {uid, email,name} = payload
-
-    const user = await User.findOne ({ uid : uid})
-    if (user){
+    role: string,
+}) {
+    const { uid, email, role, name } = payload
+    
+    const account = await User.findOne({ uid: uid })
+    
+    if (account) {
         const user: User1 = {
-            _id: user._id,
-            name: user.name,
-            email:user.email,
-            uid:user.uid
+            _id: account._id,
+            name: account.name,
+            phoneNumber: account.PhoneNumber,
+            email: account.email,
+            uid: account.uid
         }
 
-        const session = encodeSession(config.secret_key,user.role ==="adult" ? false : true )
-
+        const session = encodeSession(config.secret_key, user, account.role === "user" ? false : true)
+        
         return {
             token: session.token,
-            user: user 
+            account:account
         }
-    }
-    else {
-        const _user = User.build({uid, email, role, name})
-        await _user.save()
+    } else {
+        const _account = User.build({ uid, email, role, name, PhoneNumber })
+        
+        await _account.save()
 
         return {
-            user: _user
+            account : _account
         }
     }
 }
+
