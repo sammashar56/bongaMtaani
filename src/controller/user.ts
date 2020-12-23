@@ -1,6 +1,6 @@
 import User from "../models/user";
 import { encodeSession } from '../helpers/jwt';
-import config from "../config";
+import config from "../config/config";
 import { User1, Session } from '../helpers/index';
 
 
